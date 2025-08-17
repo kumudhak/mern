@@ -16,18 +16,31 @@ const del = require('./routes/del')
 // express app
 const app = express()
 
-// 🔥 CORS CONFIGURATION - MUST BE FIRST!
+// 🔥 SMART DYNAMIC CORS - NEVER UPDATE AGAIN!
 app.use(cors({
-  origin: [
-    'https://mern-b3zzg5yun-kumudhas-projects-dff62ea2.vercel.app', // ✅ Your NEW Vercel URL
-    'https://mern-kumudhas-projects-dff62ea2.vercel.app', // ✅ Previous URL
-    'http://localhost:3000' // Local development
-  ],
+  origin: function(origin, callback) {
+    // Allow requests with no origin (Postman, mobile apps, etc.)
+    if (!origin) return callback(null, true);
+    
+    // Allow localhost for development
+    if (origin === 'http://localhost:3000') {
+      return callback(null, true);
+    }
+    
+    // 🎯 AUTOMATICALLY ALLOW ALL VERCEL URLS!
+    if (origin.endsWith('.vercel.app')) {
+      console.log('✅ Allowing Vercel origin:', origin); // For debugging
+      return callback(null, true);
+    }
+    
+    // Block everything else
+    console.log('❌ Blocking origin:', origin); // For debugging
+    return callback(new Error('Not allowed by CORS'), false);
+  },
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true
 }));
-
 
 // Handle preflight requests explicitly
 app.options('*', cors()); // Enable preflight for all routes
