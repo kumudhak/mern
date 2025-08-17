@@ -19,7 +19,7 @@ const app = express()
 // 🔥 ADD CORS MIDDLEWARE HERE (BEFORE OTHER MIDDLEWARE)
 app.use(cors({
   origin: [
-    'https://mern-sage-seven.vercel.app/login', // Replace with your actual Vercel frontend URL
+    'https://mern-e2ws4wg20-kumudhas-projects-dff62ea2.vercel.app', 
     'http://localhost:4000'
   ],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
