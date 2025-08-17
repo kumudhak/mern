@@ -2,7 +2,7 @@ require('dotenv').config()
 
 const express = require('express')
 const mongoose = require('mongoose')
-const cors = require('cors') // 👈 ADD THIS LINE
+const cors = require('cors') // 👈 CORS package
 const workoutRoutes = require('./routes/workouts')
 const userRoutes = require('./routes/user')
 const bodyParser = require('body-parser');
@@ -16,16 +16,20 @@ const del = require('./routes/del')
 // express app
 const app = express()
 
-// 🔥 ADD CORS MIDDLEWARE HERE (BEFORE OTHER MIDDLEWARE)
+// 🔥 CORS CONFIGURATION - MUST BE FIRST!
 app.use(cors({
   origin: [
-    'https://mern-e2ws4wg20-kumudhas-projects-dff62ea2.vercel.app', 
-    'http://localhost:4000'
+    'https://mern-kumudhas-projects-dff62ea2.vercel.app', // ✅ Your correct Vercel URL
+    'https://mern-sage-seven.vercel.app', // ✅ Alternative URL from errors
+    'http://localhost:3000' // ✅ Local development (was 4000, should be 3000 for React)
   ],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true
 }));
+
+// Handle preflight requests explicitly
+app.options('*', cors()); // Enable preflight for all routes
 
 // middleware 
 app.use(express.json())
@@ -42,7 +46,7 @@ app.use((req, res, next) => {
   next()
 })
 
-// 🎯 ADD TEST ROUTE FOR RAILWAY
+// 🎯 TEST ROUTE FOR RAILWAY
 app.get('/', (req, res) => {
   res.json({ message: 'Digin Backend is running on Railway! 🚀' });
 });
