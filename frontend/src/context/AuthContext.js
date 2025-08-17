@@ -1,5 +1,6 @@
 import { createContext, useReducer, useEffect } from 'react'
 import axios from 'axios';
+import API_BASE_URL from '../config/api';
 export const AuthContext = createContext()
 
 export const authReducer = (state, action) => {
@@ -27,7 +28,7 @@ export const AuthContextProvider = ({ children }) => {
   }, [])
   const handleLogin = async (email) => {
     try {
-      const response = await axios.post('/log/login', { email });
+      const response = await axios.post(`${API_BASE_URL}/log/login`, { email });
       console.log("entered");
       const user = response.data.user;
       localStorage.setItem('user', JSON.stringify(user));
@@ -39,7 +40,7 @@ export const AuthContextProvider = ({ children }) => {
   };
   const handleLogout = async () => {
     try {
-      await axios.post('/log/logout');
+      await axios.post(`${API_BASE_URL}/log/logout`);
       localStorage.removeItem('user');
       dispatch({ type: 'LOGOUT' });
     } catch (error) {

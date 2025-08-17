@@ -4,6 +4,7 @@ import { useWorkoutsContext } from "../hooks/useWorkoutsContext";
 import { useAuthContext } from "../hooks/useAuthContext";
 // components
 import WorkoutDetails from "../components/WorkoutDetails";
+import API_BASE_URL from '../config/api';
 
 import "./Home.css";
 
@@ -30,7 +31,7 @@ const Home = ({ searchQuery }) => {
     // search
 
     const fetchWorkouts = async () => {
-      const response = await fetch("/datas", {
+      const response = await fetch(`${API_BASE_URL}/datas`, {
         headers: { Authorization: `Bearer ${user.token}` },
       });
 

@@ -10,7 +10,7 @@ const [keyword , setKeyword] = useState("")
             history.pushState(`${API_BASE_URL}/search/${keyword}`)
         }
         else{
-            history.pushState('/')
+            history.pushState(`${API_BASE_URL}/`)
         }
     }
 
