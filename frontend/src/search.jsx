@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios"
+import API_BASE_URL from '../config/api';
  export default function Search (){
 
     const [searchResult , setsearchResult] = useState([])
@@ -12,7 +13,7 @@ import axios from "axios"
                 setsearchResult([])
                 return
             }
-            const res = await axios.get("/datas")
+            const res = await axios.get(`${API_BASE_URL}/datas`)
             console.log(res)
         }
         catch(error){

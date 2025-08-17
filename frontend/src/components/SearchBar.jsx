@@ -1,5 +1,5 @@
 import React , {useState} from 'react'
-
+import API_BASE_URL from '../config/api';
 const SearchBar = ({history}) => {
 const [keyword , setKeyword] = useState("")
 
@@ -7,7 +7,7 @@ const [keyword , setKeyword] = useState("")
         e.preventDefault()
 
         if(keyword.trim()){
-            history.pushState(`/search/${keyword}`)
+            history.pushState(`${API_BASE_URL}/search/${keyword}`)
         }
         else{
             history.pushState('/')

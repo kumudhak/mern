@@ -4,14 +4,14 @@ import { format } from "date-fns-tz";
 import "./loginfo.css";
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap/dist/js/bootstrap.js";
-
+import API_BASE_URL from '../config/api';
 const LogTable = () => {
   const [logData, setLogData] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("/log/get");
+        const response = await axios.get(`${API_BASE_URL}/log/get`);
         setLogData(response.data);
       } catch (error) {
         console.error("Error fetching data:", error);

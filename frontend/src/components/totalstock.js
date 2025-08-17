@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useAuthContext } from "../hooks/useAuthContext";
 import "./totalstock.css";
-
+import API_BASE_URL from '../config/api';
 const Dis = () => {
   const [productData, setProductData] = useState([]);
 
@@ -11,7 +11,7 @@ const Dis = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("/datas", {
+        const response = await axios.get(`${API_BASE_URL}/datas`, {
           headers: { Authorization: `Bearer ${user.token}` },
         });
         setProductData(response.data);

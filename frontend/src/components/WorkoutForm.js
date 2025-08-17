@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useWorkoutsContext } from "../hooks/useWorkoutsContext";
 import { useAuthContext } from "../hooks/useAuthContext";
 import "./WorkoutForm.css";
+import API_BASE_URL from '../config/api';
 const WorkoutForm = () => {
   const { dispatch } = useWorkoutsContext();
   const { user } = useAuthContext();
@@ -46,7 +47,7 @@ const WorkoutForm = () => {
     formData.append("files", invoice);
 
     try {
-      const response = await fetch("/datas", {
+      const response = await fetch(`${API_BASE_URL}/datas`, {
         method: "POST",
         body: formData,
         headers: {

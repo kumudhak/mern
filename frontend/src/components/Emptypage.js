@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import API_BASE_URL from '../config/api';
 
 const ImageUploadForm = () => {
   const [image, setImage] = useState(null);
@@ -18,7 +19,7 @@ const ImageUploadForm = () => {
 
     try {
       // Use the relative path instead of the absolute URL
-      await axios.post('/image/img', formData, {
+      await axios.post(`${API_BASE_URL}/image/img`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },

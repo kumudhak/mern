@@ -4,7 +4,7 @@ import { useLogout } from "../hooks/useLogout";
 import { useAuthContext } from "../hooks/useAuthContext";
 import UserDetail from "./profile"; // Import UserDetail component
 import axios from "axios";
-
+import API_BASE_URL from '../config/api';
 //mui
 import "./Navbar.css";
 import {
@@ -35,7 +35,7 @@ const Navbar = ({ setSearchQuery }) => {
     try {
       // Ensure 'user' is defined before accessing 'email'
       if (user) {
-        const response = await axios.post("/log/logout", { email: user.email });
+        const response = await axios.post(`${API_BASE_URL}/log/logout`, { email: user.email });
         logout();
       } else {
         console.error("User is not defined.");

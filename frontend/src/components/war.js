@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { formatDistanceToNow } from "date-fns";
 import { useAuthContext } from "../hooks/useAuthContext";
-
+import API_BASE_URL from '../config/api';
 const Warenty = () => {
   const [expiringProducts, setExpiringProducts] = useState([]);
   const [expiredProducts, setExpiredProducts] = useState([]);
@@ -13,7 +13,7 @@ const Warenty = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("/datas", {
+        const response = await axios.get(`${API_BASE_URL}/datas`, {
           headers: { Authorization: `Bearer ${user.token}` },
         });
         console.log("Response:", response.data.warentty_date); // Log the response data

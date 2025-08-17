@@ -5,7 +5,7 @@ import { useAuthContext } from "../hooks/useAuthContext";
 import { useParams, useNavigate } from "react-router-dom";
 import "./up.css";
 import { useNotificationContext } from "../context/notificationContext";
-
+import API_BASE_URL from '../config/api';
 const UpdateWorkoutForm = () => {
   const { dispatch } = useWorkoutsContext();
   const { state: notificationState, dispatch: notificationDispatch } =
@@ -32,7 +32,7 @@ const UpdateWorkoutForm = () => {
     console.log("Fetching workout details for ID:", id);
     const fetchWorkoutDetails = async () => {
       try {
-        const response = await axios.get(`/datas/${id}`, {
+        const response = await axios.get(`${API_BASE_URL}/datas/${id}`, {
           headers: {
             Authorization: `Bearer ${user.token}`,
           },
@@ -83,7 +83,7 @@ const UpdateWorkoutForm = () => {
   };
   const handleUpdateClick = async () => {
     try {
-      const response = await axios.patch(`/datas/${id}`, formData, {
+      const response = await axios.patch(`${API_BASE_URL}/datas/${id}`, formData, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${user.token}`,
@@ -101,7 +101,7 @@ const UpdateWorkoutForm = () => {
         console.log("Limit:", formData.limit);
         if (wannaSetLimit && parseInt(formData.count, 10) <= formData.limit) {
           try {
-            await axios.post("/alert/inss", {
+            await axios.post(`${API_BASE_URL}/alert/inss`, {
               message: `The ${formData.name} is below the limit you set.`,
             });
             console.log("Notification added successfully.");

@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap/dist/js/bootstrap.js";
 import "./WorkoutDetails.css";
-
+import API_BASE_URL from '../config/api';
 //invoice
 
 //mui
@@ -89,7 +89,7 @@ const WorkoutDetails = ({ workout }) => {
       return;
     }
 
-    const response = await fetch(`/datas/${workout._id}`, {
+    const response = await fetch(`${API_BASE_URL}/datas/${workout._id}`, {
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${user.token}`,
@@ -145,7 +145,7 @@ const WorkoutDetails = ({ workout }) => {
     }
 
     try {
-      const response = await fetch(`/datas/updatelimit/${workout._id}`, {
+      const response = await fetch(`${API_BASE_URL}/datas/updatelimit/${workout._id}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
@@ -175,7 +175,7 @@ const WorkoutDetails = ({ workout }) => {
       return;
     }
 
-    const response = await fetch(`/datas/${workout._id}`, {
+    const response = await fetch(`${API_BASE_URL}/datas/${workout._id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",

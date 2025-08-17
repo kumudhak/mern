@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-
+import API_BASE_URL from '../config/api';
 const UpdateWorkout = ({ match }) => {
   const { id } = match.params;
   const [workoutData, setWorkoutData] = useState({
@@ -18,7 +18,7 @@ const UpdateWorkout = ({ match }) => {
   useEffect(() => {
     // Fetch existing workout details when the component mounts
     axios
-      .get(`/datas/${id}`)
+      .get(`${API_BASE_URL}/datas/${id}`)
       .then((response) => setWorkoutData(response.data))
       .catch((error) =>
         console.error("Error fetching workout details:", error)
@@ -32,7 +32,7 @@ const UpdateWorkout = ({ match }) => {
 
   const handleUpdate = () => {
     axios
-      .put(`/datas/${id}`, workoutData)
+      .put(`${API_BASE_URL}/datas/${id}`, workoutData)
       .then((response) => {
         console.log("Workout updated successfully:", response.data);
         // Redirect or perform any other action upon successful update

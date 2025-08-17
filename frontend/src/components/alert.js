@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./alert.css";
+import API_BASE_URL from '../config/api';
 const AlertPage = () => {
   const [notifications, setNotifications] = useState([]);
 
   useEffect(() => {
     const fetchNotifications = async () => {
       try {
-        const response = await axios.get("/alert/gett");
+        const response = await axios.get(`${API_BASE_URL}/alert/gett`);
         setNotifications(response.data);
       } catch (error) {
         console.error("Error fetching notifications:", error.message);
@@ -18,7 +19,7 @@ const AlertPage = () => {
 
   const handleAcknowledge = async (notificationId) => {
     try {
-      await axios.delete(`/alert/dell/${notificationId}`);
+      await axios.delete(`${API_BASE_URL}/alert/dell/${notificationId}`);
       setNotifications((prevNotifications) =>
         prevNotifications.filter(
           (notification) => notification._id !== notificationId

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./Userinfo.css";
-
+import API_BASE_URL from '../config/api';
 const UserD = () => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -9,7 +9,7 @@ const UserD = () => {
   useEffect(() => {
     const fetchUserDetails = async () => {
       try {
-        const response = await fetch("/user/get", {
+        const response = await fetch(`${API_BASE_URL}/user/get`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -34,7 +34,7 @@ const UserD = () => {
 
   const handleDeleteUser = async (userId) => {
     try {
-      const response = await fetch(`/user/del/${userId}`, {
+      const response = await fetch(`${API_BASE_URL}/user/del/${userId}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",

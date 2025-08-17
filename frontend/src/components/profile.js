@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./Profile.css";
-
+import API_BASE_URL from '../config/api';
 export const getUserAuthority = async (email) => {
   const userEmail = email;
   console.log(email);
   try {
-    const response = await axios.get(`/user/email/${email}`);
+    const response = await axios.get(`${API_BASE_URL}/user/email/${email}`);
     if (!response.data) {
       throw new Error("User not found");
     }
@@ -27,7 +27,7 @@ const UserDetail = ({ email }) => {
     const fetchUserDetails = async () => {
       try {
         console.log(email);
-        const response = await axios.get(`/user/email/${email}`);
+        const response = await axios.get(`${API_BASE_URL}/user/email/${email}`);
 
         if (!response.data) {
           throw new Error("User not found");
@@ -56,7 +56,7 @@ const UserDetail = ({ email }) => {
 
   const handleSave = async () => {
     try {
-      await axios.patch(`/user/up/${email}`, user); // Pass the updated user object as data
+      await axios.patch(`${API_BASE_URL}/user/up/${email}`, user); // Pass the updated user object as data
       console.log("User details updated successfully");
     } catch (error) {
       console.error("Error updating user details:", error);

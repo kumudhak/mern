@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-
+import API_BASE_URL from '../config/api';
 const ImageList = () => {
   const [images, setImages] = useState([]);
 
   useEffect(() => {
     const fetchImages = async () => {
       try {
-        const response = await axios.get("/image/all"); // Adjust the route based on your backend endpoint
+        const response = await axios.get(`${API_BASE_URL}/image/all`); // Adjust the route based on your backend endpoint
         setImages(response.data);
       } catch (error) {
         console.error("Error fetching images", error);

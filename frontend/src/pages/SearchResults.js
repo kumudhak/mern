@@ -3,6 +3,7 @@ import { useLocation } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.min.js";
 import "./SearchResults.css";
+import API_BASE_URL from '../config/api';
 
 const SearchResults = () => {
   const location = useLocation();
@@ -13,7 +14,7 @@ const SearchResults = () => {
   useEffect(() => {
     const fetchSearchResults = async () => {
       try {
-        const response = await fetch(`/datas/search?query=${query}`);
+        const response = await fetch(`${API_BASE_URL}/datas/search?query=${query}`);
         const data = await response.json();
         setSearchResults(data);
       } catch (error) {

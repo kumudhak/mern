@@ -29,7 +29,7 @@ import GroupAddIcon from "@mui/icons-material/GroupAdd";
 import LockClockIcon from "@mui/icons-material/LockClock";
 import InventoryIcon from "@mui/icons-material/Inventory";
 import RemoveShoppingCartIcon from "@mui/icons-material/RemoveShoppingCart";
-
+import API_BASE_URL from '../config/api';
 //warning
 // Import NotificationProvider context
 import { useNotificationContext } from "../context/notificationContext";
@@ -190,7 +190,7 @@ function Sidenav({ setSearchQuery }) {
   useEffect(() => {
     const fetchNotifications = async () => {
       try {
-        const response = await axios.get("/alert/gett");
+        const response = await axios.get(`${API_BASE_URL}/alert/gett`);
         const count = response.data.length; // Get the count of notifications from API response
         console.log("API Response:", response.data);
         setNotificationCount(count); // Update the count of notifications in state
@@ -225,7 +225,7 @@ function Sidenav({ setSearchQuery }) {
                 <MenuIcon />
               </IconButton>
               {/* search */}
-              {location.pathname === "/products" && ( // Only show search bar when on the products page
+              {location.pathname === `${API_BASE_URL}/products` && ( // Only show search bar when on the products page
                 <SearchInput>
                   <SearchIconWrapper>
                     <SearchIcon />

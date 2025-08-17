@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useAuthContext } from './useAuthContext'
 import axios from 'axios';
+import API_BASE_URL from '../config/api';
 export const useLogin = () => {
   const [error, setError] = useState(null)
   const [isLoading, setIsLoading] = useState(null)
@@ -10,7 +11,7 @@ export const useLogin = () => {
     setIsLoading(true)
     setError(null)
 
-    const response = await fetch('/user/login', {
+    const response = await fetch(`${API_BASE_URL}/user/login`, {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({ email, password })
@@ -24,7 +25,7 @@ export const useLogin = () => {
     if (response.ok) {
       // save the user to local storage
       localStorage.setItem('user', JSON.stringify(json))
-      const response = await axios.post('/log/login', { email });
+      const response = await axios.post(`${API_BASE_URL}/log/login`, { email });
         
       // update the auth context
       dispatch({type: 'LOGIN', payload: json})
